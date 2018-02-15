@@ -53,23 +53,23 @@ enum planck_keycodes {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-//TODO: Implemenent Mirrored layers for one handed use
+//TODO: Mac function key
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Num  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
+ * | Num  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  | Ctrl | Alt  | GUI  |Lower |Sp/Mir|Sp/Ctl|Raise | Left | Down |  Up  |Right |
+ * | Esc  | Ctrl | Alt  | GUI  |Lower |Sp/Mir|  Sp  |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = {
   {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
   {MO(_NUM),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, LT(_NUM, KC_QUOT)},
   {MT(MOD_LSFT, KC_CAPSLOCK), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT(MOD_RSFT, KC_ENT) },
-  {KC_ESC, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   LT(_QWERTY_MR, KC_SPC),  MT(MOD_RGUI, KC_SPC),  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT} // Would be nice to have way to swap the two space keys for better right hand support
+  {KC_ESC, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   LT(_QWERTY_MR, KC_SPC), KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT} // Would be nice to have way to swap the two space keys for better right hand support
 },
 
 // Qwerty - Mirrored
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_BSPC, KC_P,    KC_O,     KC_I,   KC_U,         KC_Y,   KC_T,    KC_R,    KC_E,   KC_W,   KC_Q,   KC_TAB},
   {KC_QUOT,  KC_SCLN,  KC_L  , KC_K   ,  KC_J  ,  KC_H  , KC_G   ,  KC_F  ,  KC_D  ,  KC_S  ,  KC_A  , TT(_NUM)},
   {MT(MOD_RSFT, KC_ENT), KC_SLSH,  KC_DOT  ,  KC_COMM  ,  KC_M  ,  KC_N  ,  KC_B  ,  KC_V  ,  KC_C  , KC_X, KC_Z ,  MT(MOD_LSFT, KC_CAPSLOCK)},
-  {KC_RGHT, MT(MOD_RCTL, KC_UP), MT(MOD_RSFT, KC_DOWN), MT(MOD_RGUI, KC_LEFT), MO(_RAISE_MR),_______  , _______ , LOWER ,  KC_LGUI , KC_LALT, KC_LCTL, KC_ESC  }
+  {KC_RGHT, MT(MOD_RCTL, KC_UP), MT(MOD_RSFT, KC_DOWN), MT(MOD_RGUI, KC_LEFT), MO(_RAISE),_______  , _______ , LOWER ,  KC_LGUI , KC_LALT, KC_LCTL, KC_ESC  }
 },
 
 /* Colemak
@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {EXT_PLV, XXXXXXX, XXXXXXX, KC_C,    KC_V,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX}
 },
 
-/* Raise
+/* Lower
  * ,-----------------------------------------------------------------------------------.
  * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
@@ -148,22 +148,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |             |      | Home | PgDn | PgUp | End  |
  * `-----------------------------------------------------------------------------------'
  */
-[_RAISE] = {
+[_LOWER] = {
   {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL},
   {_______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  _______, _______, KC_BSLS},
   {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, KC_QUESTION, _______},
-  {_______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END}
+  {_______, _______, _______, _______, _______, MO(_LOWER_MR), _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END}
 },
 
-[_RAISE_MR] = {
-  {KC_DEL,  KC_0,  KC_9  ,  KC_8  ,  KC_7  ,  KC_6  , KC_5   ,  KC_4  ,  KC_3  ,  KC_2  , KC_1   , KC_GRV   },
-  {_______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  _______, _______, KC_BSLS}, //TODO
-  {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, KC_QUESTION, _______}, //TODO
-  {_______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END} //TODO
+[_LOWER_MR] = {
+  { KC_DEL,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,  KC_GRV},
+  {KC_BSLS, _______, _______,  KC_EQL, KC_MINS, _______, _______, _______, _______, _______, _______, _______}, 
+  {_______, KC_HOME, KC_PGDN, KC_PGUP,  KC_END, _______, _______, _______, _______, _______, _______, _______}, 
+  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______} 
 },
 
 
-/* Lower
+/* Raise
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
@@ -171,39 +171,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |   {  |   }  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      |      |   <  |   >  |      |
+ * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_LOWER] = {
+[_RAISE] = {
   {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,    KC_ASTR,    KC_LPRN, KC_RPRN, KC_DEL},
   {_______, _______, _______, _______, _______, _______, _______,   KC_UNDS,    KC_PLUS,    KC_LBRC, KC_RBRC, KC_PIPE},
   {_______, _______, _______, _______, _______, _______, _______,  _______, _______, KC_LEFT_CURLY_BRACE, KC_RIGHT_CURLY_BRACE,  _______},
-  {_______, _______, _______, _______, _______, MO(_LOWER_MR), _______, _______,    _______,    KC_LEFT_ANGLE_BRACKET, KC_RIGHT_ANGLE_BRACKET, _______}
+  {_______, _______, _______, _______, _______, MO(_RAISE_MR), _______, _______,    _______,    _______, _______, _______}
 },
 
-[_LOWER_MR] = {
-  {KC_DEL, KC_RPRN, KC_LPRN, KC_ASTR  , KC_AMPR, KC_CIRC , KC_PERC, KC_DLR,  KC_HASH  ,  KC_AT  , KC_EXLM, KC_TILD},
-  {_______, _______, _______, _______, _______, _______, _______,   KC_UNDS,    KC_PLUS,    KC_LBRC, KC_RBRC, KC_PIPE}, //TODO
-  {_______, _______, _______, _______, _______, _______, _______,  _______, _______, KC_LEFT_CURLY_BRACE, KC_RIGHT_CURLY_BRACE,  _______}, //TODO
-  {_______, _______, _______, _______, _______, _______, _______, _______,    _______,    KC_LEFT_ANGLE_BRACKET, KC_RIGHT_ANGLE_BRACKET, _______} //TODO
+[_RAISE_MR] = {
+  { KC_DEL,             KC_LPRN,              KC_RPRN, KC_ASTR, KC_AMPR, KC_CIRC, KC_PERC,  KC_DLR, KC_HASH,   KC_AT, KC_EXLM, KC_TILD},
+  {KC_PIPE,             KC_LBRC,              KC_RBRC, KC_PLUS, KC_UNDS, _______, _______, _______, _______, _______, _______, _______}, 
+  {_______, KC_LEFT_CURLY_BRACE, KC_RIGHT_CURLY_BRACE, _______, _______, _______, _______, _______, _______, _______, _______, _______}, 
+  {_______,             _______,              _______, _______, _______, _______, _______, _______, _______, _______, _______, _______} 
 },
 
 /* Num
  * ,-----------------------------------------------------------------------------------.
- * |      |  7   |  8   |  9   |  *   |      |      |  7   |  8   |  9   |  *   |      |
+ * |      |  9   |  8   |  7   |  *   |      |      |  7   |  8   |  9   |  *   |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |  4   |  5   |  6   |  /   |      |      |  4   |  5   |  6   |  /   |      |
+ * |      |  6   |  5   |  4   |  /   |      |      |  4   |  5   |  6   |  /   |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  1   |  2   |  3   |  +   |      |      |  1   |  2   |  3   |  +   |      |
+ * |      |  3   |  2   |  1   |  +   |      |      |  1   |  2   |  3   |  +   |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |  0   |  .   | Enter|  -   |   =  |      |  0   |  .   | Enter|  -   |  =   |
+ * |      |  =   |  .   |  0   |  -   | Enter|      |  0   |  .   |  =   |  -   | Enter|
  * `-----------------------------------------------------------------------------------'
  */
 [_NUM] = {
-  {_______, KC_KP_7, KC_KP_8,   KC_KP_9,     KC_KP_ASTERISK,     _______, _______, KC_KP_7, KC_KP_8, KC_KP_9,       KC_KP_ASTERISK,     _______},
-  {_______, KC_KP_4, KC_KP_5,   KC_KP_6,     KC_KP_SLASH,        _______, _______, KC_KP_4, KC_KP_5, KC_KP_6,       KC_KP_SLASH,        _______},
-  {_______, KC_KP_1, KC_KP_2,   KC_KP_3,     KC_KP_PLUS,         _______, _______, KC_KP_1, KC_KP_2, KC_KP_3,       KC_KP_PLUS,         _______},
-  {_______, KC_KP_0, KC_KP_DOT, KC_KP_ENTER, KC_MINUS,       KC_KP_EQUAL, _______, KC_KP_0, KC_KP_DOT, KC_KP_ENTER, KC_MINUS,       KC_KP_EQUAL}
+  {_______,     KC_KP_9,   KC_KP_8, KC_KP_7, KC_KP_ASTERISK,     _______, _______, KC_KP_7, KC_KP_8,       KC_KP_9, KC_KP_ASTERISK,     _______},
+  {_______,     KC_KP_6,   KC_KP_5, KC_KP_4,    KC_KP_SLASH,     _______, _______, KC_KP_4, KC_KP_5,       KC_KP_6,    KC_KP_SLASH,     _______},
+  {_______,     KC_KP_3,   KC_KP_2, KC_KP_1,     KC_KP_PLUS,     _______, _______, KC_KP_1, KC_KP_2,       KC_KP_3,     KC_KP_PLUS,     _______},
+  {_______, KC_KP_EQUAL, KC_KP_DOT, KC_KP_0,       KC_MINUS, KC_KP_ENTER, _______, KC_KP_0, KC_KP_DOT, KC_KP_EQUAL,       KC_MINUS, KC_KP_ENTER}
 },
 
 /* Adjust (Lower + Raise)
