@@ -58,28 +58,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //TODO: Ins key.
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
- * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
+ * |Esc/Nm|   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Num  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
+ * | Tab  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  | Ctrl | Alt  | GUI  |Lower |Sp/Mir|  Sp  |Raise | Left | Down |  Up  |Right |
+ * | Fn   | Ctrl | Alt  | GUI  |Lower |Sp/Mir|  Sp  |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = {
-  {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
-  {MO(_NUM),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, LT(_NUM, KC_QUOT)},
+  {LT(_NUM, KC_ESC),  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
+  {LT(_NUM, KC_TAB),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, LT(_NUM, KC_QUOT)},
   {MT(MOD_LSFT, KC_CAPSLOCK), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT(MOD_RSFT, KC_ENT) },
-  {LT(_FN, KC_ESC), KC_LCTL, KC_LALT, KC_LGUI, LOWER,   LT(_QWERTY_MR, KC_SPC), KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT} // Would be nice to have way to swap the two space keys for better right hand support
+  {MO(_FN), KC_LCTL, KC_LALT, KC_LGUI, LOWER,   LT(_QWERTY_MR, KC_SPC), KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT} // Would be nice to have way to swap the two space keys for better right hand support
 },
 
 // Qwerty - Mirrored
 [_QWERTY_MR] = {
-  {KC_BSPC, KC_P,    KC_O,     KC_I,   KC_U,         KC_Y,   KC_T,    KC_R,    KC_E,   KC_W,   KC_Q,   KC_TAB},
-  {KC_QUOT,  KC_SCLN,  KC_L  , KC_K   ,  KC_J  ,  KC_H  , KC_G   ,  KC_F  ,  KC_D  ,  KC_S  ,  KC_A  , TT(_NUM)},
+  {KC_BSPC, KC_P,    KC_O,     KC_I,   KC_U,         KC_Y,   KC_T,    KC_R,    KC_E,   KC_W,   KC_Q,   LT(_NUM, KC_ESC)},
+  {KC_QUOT,  KC_SCLN,  KC_L  , KC_K   ,  KC_J  ,  KC_H  , KC_G   ,  KC_F  ,  KC_D  ,  KC_S  ,  KC_A  , KC_TAB},
   {MT(MOD_RSFT, KC_ENT), KC_SLSH,  KC_DOT  ,  KC_COMM  ,  KC_M  ,  KC_N  ,  KC_B  ,  KC_V  ,  KC_C  , KC_X, KC_Z ,  MT(MOD_LSFT, KC_CAPSLOCK)},
-  {KC_RGHT, MT(MOD_RCTL, KC_UP), MT(MOD_RSFT, KC_DOWN), MT(MOD_RGUI, KC_LEFT), MO(_RAISE),_______  , _______ , LOWER ,  KC_LGUI , KC_LALT, KC_LCTL, KC_ESC  }
+  {KC_RGHT, MT(MOD_RCTL, KC_UP), MT(MOD_RSFT, KC_DOWN), MT(MOD_RGUI, KC_LEFT), MO(_RAISE),_______  , _______ , LOWER ,  KC_LGUI , KC_LALT, KC_LCTL, MO(_FN)  }
 },
 
 /* Colemak
@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
-// TODO: Workman layout
+// TODO: Norman layout
 
 /* Plover layer (http://opensteno.org)
  * ,-----------------------------------------------------------------------------------.
