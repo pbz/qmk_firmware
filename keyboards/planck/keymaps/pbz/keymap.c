@@ -54,8 +54,6 @@ enum planck_keycodes {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-//TODO: Mac function key, via FN layer
-//TODO: Ins key.
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
  * |Esc/Nm|   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
@@ -68,10 +66,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = {
-  {LT(_NUM, KC_ESC),  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
+  {LT(_NUM, KC_ESC),  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    LT(_NUM, KC_BSPC)},
   {LT(_NUM, KC_TAB),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, LT(_NUM, KC_QUOT)},
   {MT(MOD_LSFT, KC_CAPSLOCK), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT(MOD_RSFT, KC_ENT) },
-  {MO(_FN), KC_LCTL, KC_LALT, KC_LGUI, LOWER,   LT(_QWERTY_MR, KC_SPC), KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT} // Would be nice to have way to swap the two space keys for better right hand support
+  {MO(_FN), KC_LCTL, KC_LALT, KC_LGUI, LOWER,   LT(_QWERTY_MR, KC_SPC), MT(MOD_RSFT, KC_SPC),  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT} // Would be nice to have way to swap the two space keys for better right hand support
 },
 
 // Qwerty - Mirrored
